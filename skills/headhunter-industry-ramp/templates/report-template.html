@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{行业}} · {{岗位}}（{{城市}}）｜行业速研与人才地图</title>
+<!--
+  猎头行业速研报告 · 主模板
+  用法：整份复制 → 替换 {{}} 占位 → 删除本段注释 → 另存为《{{行业}}-{{岗位}}-行业速研与人才地图.html》
+  规则：本文件的样式表不得修改（配色/字号/间距是统一视觉语言）；只改 body 内的内容。
+  节序固定 11 节，可增删小节，不可调整主节顺序。
+-->
+<style>
+:root{
+  --ink:#0B1F33;
+  --ink-2:#1E3A56;
+  --muted:#5C6F82;
+  --line:#DCE3EA;
+  --bg:#F5F7FA;
+  --card:#FFFFFF;
+  --accent:#D4552B;
+  --accent-soft:#FDF0EA;
+  --blue:#1B4F72;
+  --blue-soft:#EAF2F8;
+  --green:#1E7A5A;
+  --green-soft:#E8F5EF;
+  --amber:#9A6B00;
+  --amber-soft:#FDF6E3;
+  --red:#B03A2E;
+  --red-soft:#FBEAE8;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.75;
+  font-size:15px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{display:flex;max-width:1500px;margin:0 auto;align-items:flex-start;}
+
+/* ---------- 侧边导航 ---------- */
+.side{
+  width:250px;flex:0 0 250px;position:sticky;top:0;height:100vh;
+  overflow-y:auto;padding:28px 18px 40px;border-right:1px solid var(--line);
+  background:#fff;
+}
+.side h2{font-size:12px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin:0 0 14px;font-weight:600;}
+.side a{
+  display:block;color:var(--ink-2);text-decoration:none;font-size:13.5px;
+  padding:7px 10px;border-radius:6px;border-left:2px solid transparent;transition:.15s;
+}
+.side a:hover{background:var(--blue-soft);border-left-color:var(--blue);}
+.side .num{color:var(--accent);font-weight:700;font-size:11px;margin-right:6px;}
+.side .meta{margin-top:26px;padding-top:16px;border-top:1px dashed var(--line);font-size:11.5px;color:var(--muted);line-height:1.7;}
+
+/* ---------- 主区 ---------- */
+.main{flex:1;min-width:0;padding:0 44px 100px;}
+
+/* 封面 */
+.cover{
+  background:linear-gradient(135deg,#0B1F33 0%,#153A5B 55%,#1B4F72 100%);
+  color:#fff;margin:0 -44px 0;padding:52px 44px 44px;position:relative;overflow:hidden;
+}
+.cover:after{
+  content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+  border-radius:50%;border:1px solid rgba(255,255,255,.13);
+}
+.cover:before{
+  content:"";position:absolute;right:-40px;bottom:-160px;width:320px;height:320px;
+  border-radius:50%;border:1px solid rgba(255,255,255,.09);
+}
+.kicker{font-size:11.5px;letter-spacing:.24em;color:#8FB3CF;text-transform:uppercase;margin-bottom:16px;}
+.cover h1{font-size:32px;line-height:1.35;margin:0 0 8px;font-weight:700;letter-spacing:-.3px;}
+.cover h1 em{font-style:normal;color:#FFB99E;}
+.cover .sub{font-size:14px;color:#B8CCDD;margin-bottom:30px;}
+.cover .concl{
+  background:rgba(255,255,255,.08);border-left:3px solid var(--accent);
+  padding:18px 22px;border-radius:0 8px 8px 0;font-size:15.5px;line-height:1.8;
+  max-width:980px;position:relative;z-index:2;
+}
+.cover .concl b{color:#FFC9B4;}
+.hstats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px;position:relative;z-index:2;}
+.hstat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:14px 16px;}
+.hstat .n{font-size:22px;font-weight:700;letter-spacing:-.5px;color:#fff;}
+.hstat .n small{font-size:12px;font-weight:400;color:#9CB6CB;margin-left:3px;}
+.hstat .l{font-size:11.5px;color:#9CB6CB;margin-top:3px;line-height:1.5;}
+
+/* 章节 */
+section{padding-top:54px;scroll-margin-top:10px;}
+h2.sec{
+  font-size:21px;margin:0 0 6px;font-weight:700;letter-spacing:-.2px;
+  display:flex;align-items:center;gap:12px;
+}
+h2.sec .idx{
+  font-size:12px;font-weight:700;color:#fff;background:var(--ink);border-radius:5px;
+  padding:3px 8px;letter-spacing:.05em;
+}
+h3{font-size:16.5px;margin:34px 0 10px;font-weight:700;color:var(--ink);}
+h3 .dash{color:var(--accent);margin-right:6px;}
+h4{font-size:14px;margin:22px 0 8px;font-weight:700;color:var(--blue);}
+.lead{font-size:15px;color:var(--ink-2);margin:0 0 18px;line-height:1.85;max-width:980px;}
+.lead strong{background:linear-gradient(transparent 62%, #FFE7DC 62%);padding:0 2px;}
+p{margin:0 0 12px;}
+.small{font-size:12.5px;color:var(--muted);}
+
+/* 标签 */
+.tag{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:4px;vertical-align:1px;margin-left:4px;white-space:nowrap;letter-spacing:.02em;}
+.l1{background:var(--green-soft);color:var(--green);}
+.l2{background:var(--blue-soft);color:var(--blue);}
+.l3{background:var(--amber-soft);color:var(--amber);}
+.l4{background:var(--red-soft);color:var(--red);}
+
+/* 表格 */
+table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:13.2px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 2px rgba(11,31,51,.05);}
+th{background:var(--ink);color:#fff;text-align:left;padding:10px 12px;font-weight:600;font-size:12.3px;letter-spacing:.02em;vertical-align:middle;}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.65;}
+tr:last-child td{border-bottom:none;}
+tbody tr:nth-child(even){background:#FAFBFC;}
+td b{color:var(--ink);}
+.tight td,.tight th{padding:8px 10px;font-size:12.6px;}
+
+/* 卡片 */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;}
+.card .ttl{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:8px;display:flex;align-items:center;gap:7px;}
+.card .ttl .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:0 0 auto;}
+.card ul{margin:6px 0 0;padding-left:18px;font-size:13.2px;}
+.card li{margin-bottom:5px;}
+
+.callout{border-radius:10px;padding:16px 20px;margin:18px 0;font-size:13.8px;line-height:1.8;border:1px solid;}
+.callout .h{font-weight:700;margin-bottom:6px;font-size:13.5px;display:flex;gap:8px;align-items:center;}
+.c-warn{background:var(--amber-soft);border-color:#EBD9A8;color:#5E4200;}
+.c-info{background:var(--blue-soft);border-color:#C5DCEC;color:#123A56;}
+.c-key{background:var(--accent-soft);border-color:#F3CDBD;color:#6B2A12;}
+.c-risk{background:var(--red-soft);border-color:#EFC9C4;color:#5E1F18;}
+
+/* 公司卡 */
+.eco{background:#fff;border:1px solid var(--line);border-radius:10px;margin:16px 0;overflow:hidden;}
+.eco-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;padding:14px 20px;background:linear-gradient(90deg,#F0F4F8,#fff);border-bottom:1px solid var(--line);}
+.eco-h .nm{font-size:15.5px;font-weight:700;}
+.eco-h .ms{font-size:11.8px;color:var(--muted);}
+.eco-b{padding:16px 20px;}
+.eco-b dl{margin:0;display:grid;grid-template-columns:78px 1fr;gap:7px 14px;font-size:13.2px;}
+.eco-b dt{color:var(--blue);font-weight:700;font-size:12.5px;}
+.eco-b dd{margin:0;color:var(--ink-2);}
+.eco-b .for{margin-top:14px;padding:12px 14px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;font-size:13.2px;color:#5E2410;}
+
+/* 大纲 */
+.outline{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 24px;font-size:13.2px;line-height:2;}
+.outline .m1{font-weight:700;color:var(--ink);font-size:14px;margin-top:12px;}
+.outline .m1:first-child{margin-top:0;}
+.outline .m2{padding-left:20px;color:var(--ink-2);}
+.outline .m3{padding-left:42px;color:var(--muted);font-size:12.6px;}
+.outline .tbd{color:var(--red);font-size:11.5px;font-weight:700;background:var(--red-soft);padding:0 5px;border-radius:3px;}
+
+/* 条形分 */
+.bar{height:6px;background:#EDF1F5;border-radius:3px;overflow:hidden;min-width:70px;}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,#1B4F72,#3D7EA6);border-radius:3px;}
+.bar.g span{background:linear-gradient(90deg,#1E7A5A,#46A57F);}
+.bar.o span{background:linear-gradient(90deg,#D4552B,#E8895F);}
+
+.score{font-weight:700;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
+.s-hi{color:var(--green);}
+.s-mid{color:var(--amber);}
+.s-low{color:var(--red);}
+
+/* 话术块 */
+.script{background:#0B1F33;color:#D9E5EF;border-radius:10px;padding:18px 22px;font-size:13.6px;line-height:1.9;margin:14px 0;position:relative;}
+.script .who{color:#7FA8C6;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:8px;}
+.script em{color:#FFC9B4;font-style:normal;}
+
+/* 步骤/时间轴 */
+.steps{counter-reset:s;margin:14px 0;}
+.step{position:relative;padding-left:44px;margin-bottom:18px;}
+.step:before{
+  counter-increment:s;content:counter(s);
+  position:absolute;left:0;top:2px;width:28px;height:28px;border-radius:50%;
+  background:var(--ink);color:#fff;font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.step .st{font-weight:700;font-size:14px;margin-bottom:4px;}
+.step .sd{font-size:13.2px;color:var(--ink-2);}
+
+/* 待核验 */
+.checklist{list-style:none;padding:0;margin:14px 0;}
+.checklist li{position:relative;padding-left:26px;margin-bottom:8px;font-size:13.4px;}
+.checklist li:before{content:"□";position:absolute;left:0;color:var(--muted);font-size:16px;}
+
+.footer{margin-top:60px;padding:26px 0 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.8;}
+
+@media print{
+  .side{display:none;}
+  .main{padding:0 24px;}
+  .cover{margin:0 -24px;}
+  section{page-break-inside:avoid;}
+}
+@media (max-width:1100px){
+  .side{display:none;}
+  .main{padding:0 20px 60px;}
+  .cover{margin:0 -20px;padding:36px 20px;}
+  .hstats{grid-template-columns:1fr 1fr;}
+  .grid2,.grid3{grid-template-columns:1fr;}
+  .cover h1{font-size:24px;}
+  table{font-size:12px;}
+}
+</style>
+<style>
+/* ---------- 分页与 Word 页眉页脚：只在打印/转 docx 生效，不改变屏幕观感 ---------- */
+@page{
+  size:A4;
+  margin:18mm 16mm 20mm;
+  @bottom-center{content:counter(page) " / " counter(pages);font-size:9pt;color:#5C6F82;}
+  @top-right{content:"行业速研与人才地图";font-size:8.5pt;color:#8FA3B5;}
+}
+@page cover{@bottom-center{content:none;}@top-right{content:none;}}
+section[role="cover"]{page:cover;padding-top:0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ========== 侧边目录：条目与正文章节一一对应，编号 01–11 ========== -->
+<nav class="side">
+  <h2>目录</h2>
+  <a href="#p1"><span class="num">01</span>一页结论</a>
+  <a href="#p0"><span class="num">02</span>岗位锚定：这是什么岗</a>
+  <a href="#painting"><span class="num">03</span>能力画像表</a>
+  <a href="#p1i"><span class="num">04</span>行业格局：钱在哪一节</a>
+  <a href="#p2"><span class="num">05</span>六模块知识地图</a>
+  <a href="#p3"><span class="num">06</span>四家标杆拆解</a>
+  <a href="#p4"><span class="num">07</span>人才地图（四张表）</a>
+  <a href="#salary"><span class="num">08</span>薪酬对标与谈薪空间</a>
+  <a href="#p5"><span class="num">09</span>触达：话术与题库</a>
+  <a href="#p6"><span class="num">10</span>搜寻路径与风险</a>
+  <a href="#appendix"><span class="num">11</span>来源与置信度说明</a>
+  <div class="meta">
+    编制：{{编制人}}<br>
+    方法论：猎头快速吃透陌生行业<br>
+    数据截止：{{YYYY-MM-DD}}<br>
+    来源分级：✅L1 官方 / 🟡L2 机构 / 🔵L3 媒体 / ❓L4 待核验
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ========== 封面（role="cover" 让转 docx 时封面独立成页、不带页码） ========== -->
+<section class="cover" role="cover">
+  <div class="kicker">行业速研 · 岗位交付包 / {{行业英文或缩写}}</div>
+  <h1>{{公司名}} <em>{{岗位名}}（{{城市}}）</em><br>{{报告主题}}</h1>
+  <div class="sub">{{细分赛道}} · 岗位锚定 → 行业格局 → 标杆拆解 → 人才地图 → 触达话术</div>
+
+  <!-- 一句话结论：4-6 行讲完，必须包含"这是什么岗 / 钱在哪 / 人在哪 / 难点在哪" -->
+  <div class="concl">
+    <b>一句话结论：</b>{{这不是一个通用岗位，而是……}}——{{挂在什么名下，实际干什么}}。
+    {{薪资}}只是这个岗位的<b>入场价</b>：{{真实带宽与其依据}}；
+    真正匹配的人不在{{A 类公司}}，而在<b>{{B 类公司/团队}}</b>里。
+    这个岗位的难点不是找不到人，是<b>{{一句话点出筛选要害}}</b>。
+  </div>
+
+  <!-- 4 个数字：每个都是判断，不是凑数的统计 -->
+  <div class="hstats">
+    <div class="hstat"><div class="n">{{N}}<small>家</small></div><div class="l">{{客户给的原始池，按什么分}}</div></div>
+    <div class="hstat"><div class="n">{{M}}<small>家</small></div><div class="l">{{我筛出的主攻池}}<br>（其余降为备选/不碰）</div></div>
+    <div class="hstat"><div class="n">{{X–Y}}<small>K</small></div><div class="l">{{同城同岗真实带宽}}<br>（非本 JD 挂牌价）</div></div>
+    <div class="hstat"><div class="n">{{A–B}}<small>周</small></div><div class="l">{{建议交付节奏}}</div></div>
+  </div>
+</section>
+
+
+<!-- ========== 01 一页结论 ========== -->
+<section id="p1">
+  <h2 class="sec"><span class="idx">01</span>一页结论：{{这个岗位的真实需求，藏在 JD 没写的地方}}</h2>
+
+  <p class="lead">
+    {{用 3-5 句话讲清"JD 只有几行，但叠上公司产品节奏后，岗位归属立刻清晰"这件事。}}
+    <strong>{{这里放全文最关键的一句判断，用渐变底色强调，全文只出现 1-2 次}}</strong>。
+    {{补一条带来源等级的事实支撑}} <span class="tag l3">🔵L3</span>。
+  </p>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="ttl"><span class="dot"></span>四条判断（可直接拿去跟客户/人选讲）</div>
+      <ul>
+        <li><b>① 岗位性质</b>：{{扩编型/预研型、量产/0-1}}。要的是"{{一句话描述这类人}}"。</li>
+        <li><b>② 能力重心</b>：{{核心三到四项能力，要具体到工艺或技术名词}}。</li>
+        <li><b>③ 人才真实所在地</b>：不在{{表象行业}}，在{{真实来源池，列 4-6 家公司}}。</li>
+        <li><b>④ 最大成交风险</b>：{{一流人选嫌什么、二流人选缺什么，中间层厚不厚}}。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="ttl"><span class="dot"></span>三条情报差（用它们开场，立刻区分于群发猎头）</div>
+      <ul>
+        <li><b>{{情报标题一}}</b>：{{旧数据 vs 最新公开数据}} <span class="tag l2">🟡L2</span>。</li>
+        <li><b>{{情报标题二}}</b>：{{数字或事件的变化}} <span class="tag l1">✅L1</span>。</li>
+        <li><b>{{情报标题三}}</b>：{{新增业务/产品对候选人的意义}} <span class="tag l1">✅L1</span>。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout c-key">
+    <div class="h">⚑ 最重要的一条：{{一句话点出这份材料最该被质疑或最该被强调的地方}}</div>
+    {{2-4 句展开。写清"你的动作应该是什么"，而不是只描述现象。}}
+  </div>
+</section>
+
+
+<!-- ========== 02 岗位锚定 ========== -->
+<section id="p0">
+  <h2 class="sec"><span class="idx">02</span>岗位锚定：把 JD 拆成能力画像</h2>
+
+  <p class="lead">
+    先拆 JD，再研究行业。顺序反了会研究得很爽，但交付不了岗位。这个 JD 的{{N}}行职责翻译过来是这样：
+  </p>
+
+  <table class="tight">
+    <thead>
+      <tr><th style="width:22%">JD 原文</th><th style="width:26%">行业黑话翻译</th><th style="width:28%">反推出什么</th><th style="width:24%">筛人含义</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{原文一行}}</td>
+        <td>{{对应的行业术语}}</td>
+        <td>{{说明产品形态、团队话语权、技术难点}}</td>
+        <td><b>{{硬项还是加分项}}</b>。{{为什么这么说}}</td>
+      </tr>
+      <tr>
+        <td>{{原文二行}}</td>
+        <td>{{术语}}</td>
+        <td>{{反推}}</td>
+        <td><b>核心硬门槛</b>。{{谁会被卡掉}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3><span class="dash">/</span>硬性项 / 真需求 / 弹性项 / 装饰项</h3>
+
+  <table class="tight">
+    <thead><tr><th style="width:14%">类型</th><th style="width:42%">JD 里的对应内容</th><th style="width:44%">处理策略</th></tr></thead>
+    <tbody>
+      <tr><td><b>硬门槛</b><br><span class="small">不可绕</span></td>
+        <td>{{学历/年限/软件/证书等一票否决项}}</td>
+        <td>{{第一次电话就问什么；哪些不必纠结}}</td></tr>
+      <tr><td><b>真需求</b><br><span class="small">搜寻主线</span></td>
+        <td>{{客户真正在意的那几句，通常在 JD 末尾单独补的}}</td>
+        <td>{{全部写进搜索条件；点出"哪一句才是真心话"}}</td></tr>
+      <tr><td><b>弹性项</b><br><span class="small">做排序用</span></td>
+        <td>{{加分但非必须}}</td>
+        <td>用来做 A/B/C 分级，不作为淘汰条件</td></tr>
+      <tr><td><b>装饰项</b><br><span class="small">直接忽略</span></td>
+        <td>{{"热爱行业""抗压能力强"这类}}</td>
+        <td>{{如果这些词在本公司有具体含义，就翻译出来}}</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout c-info">
+    <div class="h">◉ {{同一岗位上还有几个"影子 JD"，说明客户自己也在试水}}</div>
+    {{列出同期在招的同名/近名岗位、薪资差异，然后给解读：HC 真不真、画像定没定死、你的动作是什么。}}
+  </div>
+
+  <h3><span class="dash">/</span>组织上下文与商业上下文（JD 里没有，但决定成败的两块）</h3>
+
+  <table class="tight">
+    <thead><tr><th style="width:18%">维度</th><th style="width:40%">推断</th><th style="width:42%">置信度与待确认</th></tr></thead>
+    <tbody>
+      <tr><td>汇报关系</td><td>{{推断向谁汇报}}</td><td>{{✅L1 / ❓L4}}。{{若不同会怎样影响要求}}</td></tr>
+      <tr><td>团队规模</td><td>{{估几人，怎么分组}}</td><td>{{❓L4 估算}}。{{怎么问出来}}</td></tr>
+      <tr><td>协作边界</td><td>{{跨哪几个部门}}</td><td>{{从 JD 第几条可确认}}</td></tr>
+      <tr><td>薪酬结构</td><td>{{几薪、社保公积金基数、补贴}}</td><td>{{这两条是隐性减分项，谈薪时不要藏}}</td></tr>
+      <tr><td>工作节奏</td><td>{{上下班、双休、加班调休}}</td><td>{{候选人侧要如实告知}}</td></tr>
+      <tr><td>HC 真实性</td><td><b>{{真/存疑}}</b>。{{首发时间、现在是否仍在招}}</td><td>{{在线 N 个月 = 招不到，这是议价空间也是风险}}</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout c-warn">
+    <div class="h">⚠ 一个必须问客户的矛盾点：{{在线很久，卡在哪一步？}}</div>
+    {{给出 2 个可能的岔路，并说明各自对应完全不同的人才池与动作。收尾一句：这个岔路口不问清，后面 80% 的搜寻是白做。}}
+  </div>
+</section>
+
+
+<!-- ========== 03 能力画像表 ========== -->
+<section id="painting">
+  <h2 class="sec"><span class="idx">03</span>能力画像表：要什么人、从哪类公司来</h2>
+
+  <table>
+    <thead>
+      <tr><th style="width:13%">维度</th><th style="width:32%">JD 原文线索</th><th style="width:35%">推断</th><th style="width:10%">置信度</th><th style="width:10%">待确认</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>核心技术栈</td><td>{{原文}}</td><td>{{整机级还是零件级；加分栈是什么}}</td><td>✅L1</td><td>{{待确认项}}</td></tr>
+      <tr><td>必须条件</td><td>{{原文}}</td><td>{{这句话的实际门槛}}</td><td>✅L1</td><td>—</td></tr>
+      <tr><td>弹性条件</td><td>{{原文}}</td><td>{{它恰好是区分哪两类人的分水岭}}</td><td>✅L1</td><td>—</td></tr>
+      <tr><td>汇报关系</td><td>未写</td><td>{{推断}}</td><td>❓L4</td><td>必问</td></tr>
+      <tr><td>薪酬带宽</td><td>{{挂牌价}} → 年包 {{范围}}</td><td>{{对应哪一档；另一档在哪}}</td><td>✅L1</td><td>{{上限是否为硬顶}}</td></tr>
+      <tr><td><b>目标公司池</b></td><td>{{客户给了几家，怎么分}}</td><td><b>{{对客户给的池子做修正：权重错在哪}}</b></td><td>✅L1（池子）<br>❓L4（权重）</td><td>需用 2–3 个样本验证</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout c-key">
+    <div class="h">⚑ 对客户给的目标公司池，我做了反向修正——这是这份报告最值钱的一页</div>
+    {{解释客户的分类逻辑错在哪（通常按"知名度"而非"匹配逻辑"），然后给四档：}}
+    <div style="margin-top:10px">
+      <b>高命中（立刻打）：</b>{{…}}<br>
+      <b>中命中（备选）：</b>{{…}}<br>
+      <b>低命中（不优先）：</b>{{…}}<br>
+      <b>看似相关但不碰：</b>{{…}}
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== 04 行业格局 ========== -->
+<section id="p1i">
+  <h2 class="sec"><span class="idx">04</span>行业格局：钱集中在哪一节，为什么这决定了岗位价值</h2>
+
+  <p class="lead">
+    <strong>{{结论：钱不在上游零部件，也不在下游渠道，而在 X 环节，因为它同时掌握 A、B、C 三件事}}</strong>。
+    {{再补一句：这个环节的毛利被什么咬住，因此这个岗位才"看起来普通、实际关键"。}}
+  </p>
+
+  <h3><span class="dash">/</span>产业链三层与价值分布</h3>
+
+  <table class="tight">
+    <thead><tr><th style="width:12%">环节</th><th style="width:30%">代表企业</th><th style="width:26%">价值量 / 竞争格局</th><th style="width:32%">与本岗位的关系</th></tr></thead>
+    <tbody>
+      <tr><td><b>上游</b><br>零部件与材料</td><td>{{代表企业}}</td><td>{{毛利与格局}} <span class="tag l3">🔵L3</span></td><td><b>{{间接但关键}}</b>：{{这群人是不是"半成品人才"}}</td></tr>
+      <tr><td><b>中游</b><br>{{本体/整机}}</td><td>{{代表企业，客户加粗}}</td><td>{{出货/规模/集中度}} <span class="tag l2">🟡L2</span></td><td><b>岗位所在层</b>。{{决定哪三件事}}</td></tr>
+      <tr><td><b>下游</b><br>场景与渠道</td><td>{{代表渠道}}</td><td>{{份额}} <span class="tag l2">🟡L2</span></td><td>{{对本岗位的约束，如认证/合规}}</td></tr>
+    </tbody>
+  </table>
+
+  <h3><span class="dash">/</span>市场位置：{{口径之争}}</h3>
+
+  <p>{{一句话说明这为什么是最能在 30 秒内证明"我懂行"的素材。}}</p>
+
+  <table class="tight">
+    <thead><tr><th style="width:18%">口径 / 机构</th><th style="width:34%">排名</th><th style="width:26%">同行的说法</th><th style="width:22%">怎么用</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>{{机构一}} <span class="tag l2">🟡L2</span></td><td>{{数据}}</td><td>—</td>
+        <td rowspan="3">{{给一段可直接照读的话术，把"口径差异"变成开场谈资}}</td>
+      </tr>
+      <tr><td>{{机构二}}</td><td>{{数据}}</td><td>{{同行}}</td></tr>
+      <tr><td>公司自述 <span class="tag l1">✅L1</span></td><td>{{官方数据}}</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <h3><span class="dash">/</span>为什么"{{某品类}}"是这家公司这个岗位的主战场</h3>
+
+  <div class="grid3">
+    <div class="card"><div class="ttl"><span class="dot"></span>{{营收结构已换挡}}</div>
+      <p class="small" style="margin:0">{{数据与来源}}</p></div>
+    <div class="card"><div class="ttl"><span class="dot"></span>{{该品类最吃这个工种}}</div>
+      <p class="small" style="margin:0">{{技术原因，列 4-6 个具体环节}}</p></div>
+    <div class="card"><div class="ttl"><span class="dot"></span>{{所以岗位落点在 X 地}}</div>
+      <p class="small" style="margin:0">{{招聘信息佐证}}</p></div>
+  </div>
+
+  <div class="callout c-info">
+    <div class="h">◉ 行业趋势三条（跟候选人聊"未来"时用，别聊宏观愿景）</div>
+    <b>① {{趋势一}}</b>：{{对候选人的意义}}。<br>
+    <b>② {{趋势二}}</b>：{{对能力要求的变化}}。<br>
+    <b>③ {{趋势三}}</b>：{{资本/格局变化，以及不要过度承诺的东西}}。
+  </div>
+</section>
+
+
+<!-- ========== 05 六模块知识地图 ========== -->
+<section id="p2">
+  <h2 class="sec"><span class="idx">05</span>六模块知识地图：能下钻三层的骨架</h2>
+
+  <p class="lead">
+    这张大纲可以直接导入 XMind。标 <span class="tbd">待补</span> 的是下一轮研究的入口，不是遗漏。
+  </p>
+
+  <div class="outline">
+    <div class="m1">1 · 产业链</div>
+    <div class="m2">上游：{{环节与代表企业}}</div>
+    <div class="m3">关键判断：{{一句话}}</div>
+    <div class="m2">中游：{{…}}</div>
+    <div class="m2">下游：{{…}}</div>
+
+    <div class="m1">2 · 产品</div>
+    <div class="m2">{{产品线一}}</div>
+    <div class="m2">{{产品线二（标粗主引擎）}}</div>
+    <div class="m3">价格带：{{区间}} <span class="tbd">待补</span></div>
+
+    <div class="m1">3 · 技术</div>
+    <div class="m2">{{技术域一}}</div>
+    <div class="m2">{{技术域二}}</div>
+    <div class="m2">{{本岗位所在层}}：{{具体技术点}}</div>
+    <div class="m3">成熟度：{{量产 / 小批量 / 实验室}}</div>
+
+    <div class="m1">4 · 企业</div>
+    <div class="m2">{{客户}}：{{一句话定位}}</div>
+    <div class="m2">{{竞对 A / B / C}}：{{各自路线}}</div>
+    <div class="m2">{{跨界玩家}}：{{为什么值得挖}}</div>
+
+    <div class="m1">5 · 人才</div>
+    <div class="m2">分布：{{城市排序，用 > 连接}}</div>
+    <div class="m2">{{本地池}}</div>
+    <div class="m2">区域薪资差：{{比例}}</div>
+
+    <div class="m1">6 · 趋势</div>
+    <div class="m2">{{趋势一}}</div>
+    <div class="m2">{{趋势二}}</div>
+    <div class="m2">{{趋势三}} <span class="tbd">待补</span></div>
+  </div>
+</section>
+
+
+<!-- ========== 06 四家标杆 ========== -->
+<section id="p3">
+  <h2 class="sec"><span class="idx">06</span>四家标杆：谁的团队值得挖，谁挖不动</h2>
+
+  <p class="lead">
+    选四家覆盖不同路线：<b>{{A}}</b>（{{定位}}）、<b>{{B}}</b>（{{定位}}）、
+    <b>{{C}}</b>（{{定位}}）、<b>{{D}}</b>（{{定位}}）。
+    每家末尾都要回答一句：<strong>对这个岗位意味着什么。</strong>
+  </p>
+
+  <div class="eco">
+    <div class="eco-h"><span class="nm">{{公司名}}</span><span class="ms">{{城市}} · {{成立年}} · {{一句话定位}}</span></div>
+    <div class="eco-b">
+      <dl>
+        <dt>产品</dt><dd>{{卖什么给谁}}</dd>
+        <dt>技术</dt><dd>{{与别人的区别，要具体到工艺或算法，不能写"技术领先"}}</dd>
+        <dt>团队</dt><dd>{{研发怎么分组、谁带、重心在哪}} <span class="tag l4">❓L4 人数待核</span></dd>
+        <dt>商业化</dt><dd>{{交付量、客户、真量产还是小批量}} <span class="tag l2">🟡L2</span></dd>
+        <dt>最新动态</dt><dd>{{近半年关键事件}}</dd>
+      </dl>
+      <div class="for"><b>对我们这个岗位意味着：</b>{{是客户还是池子 / 哪类人最值钱 / 能挖谁、挖不动谁}}。
+      <b>打法：{{一句话可执行的动作}}。</b></div>
+    </div>
+  </div>
+
+  <!-- 其余 3 家同样结构，复制上面的 .eco 块 -->
+
+  <div class="callout c-info">
+    <div class="h">◉ 另外几个"人才富矿"，不在客户的清单里，但命中率更高</div>
+    <b>{{公司}}</b>：{{为什么值得挖、怎么打}}。<br>
+    <b>{{公司}}</b>：{{…}}。<br>
+    <b>{{公司}}</b>：{{…}}。
+  </div>
+</section>
+
+
+<!-- ========== 07 人才地图四张表 ========== -->
+<section id="p4">
+  <h2 class="sec"><span class="idx">07</span>人才地图：四张表</h2>
+
+  <p class="lead">
+    一份人才地图如果只有姓名和公司，那是通讯录。真正的地图要能回答三件事：<strong>人在哪、怎么找到他、值不值得找。</strong>
+    下面四张表按这个标准填。人才层用"画像代号 + 分项得分"呈现——具体人名在执行业务里补，这份报告负责把"该找什么样的人"钉死。
+  </p>
+
+  <h3><span class="dash">/</span>表 1 · 公司池（按"可得性 × 匹配度"重排，不是按知名度）</h3>
+
+  <table class="tight">
+    <thead>
+      <tr><th style="width:6%">层</th><th style="width:14%">公司</th><th style="width:8%">地点</th><th style="width:22%">团队特征</th><th style="width:12%">在招信号</th><th style="width:7%">匹配度</th><th style="width:31%">用法与理由</th></tr>
+    </thead>
+    <tbody>
+      <tr><td rowspan="2"><b>A</b><br><span class="small">直接对标<br>立刻打</span></td>
+        <td><b>{{公司}}</b></td><td>{{城市}}</td><td>{{团队特征，具体到技术或工艺}}</td><td>{{在招情况}}</td><td class="score s-hi">5</td><td>{{怎么打，打哪一层}}</td></tr>
+      <tr><td><b>{{公司}}</b></td><td>{{城市}}</td><td>{{…}}</td><td>{{…}}</td><td class="score s-hi">5</td><td>{{…}}</td></tr>
+
+      <tr><td rowspan="2"><b>B</b><br><span class="small">相邻跨界<br>高潜</span></td>
+        <td><b>{{公司}}</b></td><td>{{城市}}</td><td>{{…}}</td><td>—</td><td class="score s-mid">4</td><td>{{…}}</td></tr>
+      <tr><td><b>{{公司}}</b></td><td>{{城市}}</td><td>{{…}}</td><td>—</td><td class="score s-mid">3</td><td>{{…}}</td></tr>
+
+      <tr><td rowspan="2"><b>C</b><br><span class="small">本地池<br>零搬迁成本</span></td>
+        <td><b>{{公司}}</b></td><td>{{城市}}</td><td>{{…}}</td><td>{{…}}</td><td class="score s-hi">4</td><td>{{…}}</td></tr>
+      <tr><td><b>{{公司}}</b></td><td>{{城市}}</td><td>{{…}}</td><td>—</td><td class="score s-mid">4</td><td>{{…}}</td></tr>
+
+      <tr><td rowspan="1"><b>D</b><br><span class="small">上游工艺<br>半成品</span></td>
+        <td><b>{{公司}}</b></td><td>{{城市}}</td><td>{{…}}</td><td>—</td><td class="score s-low">2</td><td><b>不当候选人池，当情报源</b>：{{能问到什么}}</td></tr>
+    </tbody>
+  </table>
+
+  <p class="small">
+    打分说明：匹配度 1–5 = 作为"人才来源池"的价值。5 = 一打就有；3 = 需筛选；2 = 不建议作为主池。
+    {{再补一句：客户原始清单里哪些被降级，为什么。}}
+  </p>
+
+  <h3><span class="dash">/</span>表 2 · 团队层（这张表是整份地图的骨干）</h3>
+
+  <table class="tight">
+    <thead><tr><th style="width:13%">公司</th><th style="width:17%">团队</th><th style="width:13%">负责人</th><th style="width:24%">技术方向</th><th style="width:9%">人数</th><th style="width:10%">汇报线</th><th style="width:14%">近期变动</th></tr></thead>
+    <tbody>
+      <tr><td><b>{{客户}}</b></td><td>{{团队名}}</td><td>待核 <span class="tag l4">❓</span></td><td>{{方向}}</td><td>{{估}} <span class="tag l4">❓</span></td><td>{{汇报线}}</td><td>{{扩张/稳定}}</td></tr>
+      <tr><td>{{竞对}}</td><td>{{团队名}}</td><td>待核</td><td>{{方向}}</td><td>{{估}} <span class="tag l4">❓</span></td><td>—</td><td><b>{{变动 = 挖人窗口}}</b></td></tr>
+    </tbody>
+  </table>
+
+  <p class="small">
+    说明：团队负责人姓名与人数需通过①招聘页组织信息②专利共同发明人③候选人转介绍三条路径补齐。<b>本表已标出"该去补哪个空"</b>，这就是它的价值——不装懂。
+  </p>
+
+  <h3><span class="dash">/</span>表 3 · 人才层：{{N}} 个可直接打电话的画像（含分项得分）</h3>
+
+  <table class="tight">
+    <thead>
+      <tr><th style="width:7%">代号</th><th style="width:15%">现公司/团队</th><th style="width:19%">技术方向</th><th style="width:19%">代表项目（该问什么）</th><th style="width:9%">背景来源</th><th style="width:8%">触达</th><th style="width:23%">匹配度分项</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>P1</b></td><td>{{公司}} · {{团队}}<br><span class="small">{{年限}}</span></td>
+        <td>{{技术方向}}</td>
+        <td>"{{一句能验真伪的提问}}"</td>
+        <td>{{家电/消费电子/机器人}}</td><td class="score s-hi">高</td>
+        <td>技术栈 <b>{{n}}</b>/40 · 项目阶段 <b>{{n}}</b>/30 · 动机 <b>{{n}}</b>/20 · 触达 <b>{{n}}</b>/10 = <span class="score s-hi">{{总分}}</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout c-info">
+    <div class="h">◉ 打分口径（客户问起来要能解释）</div>
+    <b>技术栈 40 分</b>：{{维度}}。<br>
+    <b>项目阶段 30 分</b>：{{是否主导过从设计到量产}}。<br>
+    <b>动机 20 分</b>：{{来这座城市的客观理由 + 节奏接受度}}。<br>
+    <b>可触达 10 分</b>：同城 > 有共同前同事 > 纯冷 call。<br>
+    <b>经验值：70 分以上值得推，50–70 做备选，50 以下不浪费时间。</b>
+  </div>
+
+  <h3><span class="dash">/</span>表 4 · 岗位信号：从招聘信息读出客户的真实状态</h3>
+
+  <table class="tight">
+    <thead><tr><th style="width:14%">公司</th><th style="width:26%">在招岗位</th><th style="width:11%">首发时间</th><th style="width:11%">重复/持续</th><th style="width:38%">推断与动作</th></tr></thead>
+    <tbody>
+      <tr><td><b>{{客户}}</b></td><td>{{岗位名 + 岗位号 + 薪资}}</td><td>{{YYYY-MM}}</td><td><b>{{N 个月仍在招}}</b></td><td>{{推断}}。<b>动作：</b>{{具体动作}}</td></tr>
+      <tr><td>{{同城其他公司}}</td><td>{{岗位}}</td><td>{{时间}}</td><td>在招</td><td>{{说明本地人才被抢 / 可用于谈薪参考}}</td></tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- ========== 08 薪酬对标 ========== -->
+<section id="salary">
+  <h2 class="sec"><span class="idx">08</span>薪酬对标：{{挂牌价}}是入口价，不是市场价</h2>
+
+  <p class="lead">
+    这是这个单子最容易被做废的地方。<strong>如果照着 {{挂牌价}} 去找 {{画像}} 的人，注定失败</strong>——
+    {{说明这个价位实际对应哪一档，把档位对齐后成单率会怎么变。}}
+  </p>
+
+  <table>
+    <thead><tr><th style="width:26%">参照物</th><th style="width:22%">薪资</th><th style="width:14%">年包</th><th style="width:38%">解读</th></tr></thead>
+    <tbody>
+      <tr><td><b>本岗位（JD）</b></td><td>{{X–Y}}K × {{薪}}</td><td><b>{{年包}}</b></td><td>{{对应哪一档；对谁有吸引力}}</td></tr>
+      <tr><td>{{同城同岗更高档}}</td><td>{{…}}</td><td>{{…}}</td><td><b>客户真实上限在这里。</b>{{别把人往低价里塞}}</td></tr>
+      <tr><td>{{市场均值}}</td><td>约 <b>{{n}}</b>K/月 <span class="tag l2">🟡L2</span></td><td>—</td><td>{{口径说明，含哪些行业}}</td></tr>
+      <tr><td>{{本地天花板}}</td><td>{{区间}}</td><td>{{…}}</td><td>{{说明这座城市不是低价市场}}</td></tr>
+    </tbody>
+  </table>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="ttl"><span class="dot"></span>对{{本地人选}}：{{打钱}}</div>
+      <p style="margin:0;font-size:13.2px">{{涨幅空间 + 必须提前说清的两件事，如社保公积金基数}}</p>
+    </div>
+    <div class="card">
+      <div class="ttl"><span class="dot"></span>对{{外地人选}}：{{打总账和生活方式}}</div>
+      <p style="margin:0;font-size:13.2px">{{购买力换算 + 客户明确红线 + 好用的切入角度}}</p>
+    </div>
+  </div>
+
+  <div class="callout c-warn">
+    <div class="h">⚠ 别拿"{{上市/期权}}"当薪酬筹码</div>
+    {{说明公开事实是什么、客户确认了什么、没确认什么。收尾给合规说法，可直接照读。}}
+  </div>
+</section>
+
+
+<!-- ========== 09 触达 ========== -->
+<section id="p5">
+  <h2 class="sec"><span class="idx">09</span>触达：破冰三式、痛点提问、五问执行版、面试题库</h2>
+
+  <p class="lead">
+    {{这类候选人最"实"：你讲趋势他敷衍，你讲技术他眼睛会亮。}}
+    所以破冰一定不要从"有个机会"开始，从"一个他每天在骂的技术问题"开始。
+  </p>
+
+  <h3><span class="dash">/</span>破冰三式</h3>
+
+  <div class="script">
+    <span class="who">式一 · 技术痛点式（命中率最高）</span>
+    "{{姓名}}工，冒昧打扰。我在帮一家做{{产品}}的公司找{{岗位}}，聊之前想先请教你个问题——<em>{{一个他每天都在处理的技术难题}}</em>"<br><br>
+    <span style="color:#8FB3CF">作用：{{一句话暴露你懂这个品类。愿意接话的人，后面 20 分钟都好聊。}}</span>
+  </div>
+
+  <div class="script">
+    <span class="who">式二 · 行业事件式（用真实数据，别编）</span>
+    "{{看到某公司 X 月的融资/产品事件了吗？他们现在{{业务占比}}，{{某地}}那边一口气挂了{{N}}个岗。<em>{{转折到对方身上}}</em>"<br><br>
+    <span style="color:#8FB3CF">作用：用非公开常识级数据区分于群发猎头。数据必须真实。</span>
+  </div>
+
+  <div class="script">
+    <span class="who">式三 · 职业阶段式（对 5 年+ 的人用）</span>
+    "{{你这个方向的人，做到第 5 年通常卡在一个地方——<em>{{阶段痛点}}</em>你现在的下一步，是想带人还是想碰更复杂的产品形态？"<br><br>
+    <span style="color:#8FB3CF">作用：直接戳阶段痛点，适合哪几个画像。</span>
+  </div>
+
+  <h3><span class="dash">/</span>痛点提问清单（每一条都能验真伪）</h3>
+
+  <table class="tight">
+    <thead><tr><th style="width:22%">行业痛点</th><th style="width:40%">候选人版问题</th><th style="width:38%">听什么（真做过 vs 没做过）</th></tr></thead>
+    <tbody>
+      <tr><td>{{痛点}}</td><td>"{{问题}}"</td><td><b>真做过</b>：{{给数值、给失效模式、给改法}}<br><b>没做过</b>：{{笼统回答的样子}}</td></tr>
+    </tbody>
+  </table>
+
+  <h3><span class="dash">/</span>客户五问的执行版</h3>
+
+  <table class="tight">
+    <thead><tr><th style="width:5%">#</th><th style="width:15%">客户要求</th><th style="width:42%">电话里怎么问（可照读）</th><th style="width:38%">判据 / 一票否决线</th></tr></thead>
+    <tbody>
+      <tr><td><b>1</b></td><td>{{地点}}</td><td>"{{照读话术}}"</td><td>{{什么算高意向，什么算低意向}}</td></tr>
+      <tr><td><b>2</b></td><td>{{薪资}}</td><td>"{{照读话术}}"</td><td>{{涨幅红线}}</td></tr>
+      <tr><td><b>3</b></td><td>{{强度}}</td><td>"{{照读话术}}"</td><td>{{不匹配的信号}}</td></tr>
+      <tr><td><b>4</b></td><td>{{离职原因/到岗}}</td><td>"{{照读话术}}"</td><td>{{什么情况不优先推}}</td></tr>
+      <tr><td><b>5</b></td><td>{{学历等硬项}}</td><td>"{{照读话术}}"</td><td><b>一票否决项。</b>{{为什么第一次电话就问}}</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout c-key">
+    <div class="h">⚑ 追加第 6 问（客户没写，但决定这个单子能不能成）</div>
+    <b>"{{一个能直接分出两类人的问题}}"</b><br>
+    {{解释它为什么比前五问加起来更有价值。}}
+  </div>
+
+  <h3><span class="dash">/</span>动机分型：不同类型的人，用不同的角度</h3>
+
+  <table class="tight">
+    <thead><tr><th style="width:14%">类型</th><th style="width:28%">识别特征</th><th style="width:29%">切入角度</th><th style="width:29%">千万不要说</th></tr></thead>
+    <tbody>
+      <tr><td><b>{{技术升级型}}</b></td><td>{{他关心什么}}</td><td>{{用什么打动}}</td><td>{{哪句话会立刻掉分}}</td></tr>
+      <tr><td><b>{{稳定避险型}}</b></td><td>{{…}}</td><td>{{…}}</td><td>{{…}}</td></tr>
+      <tr><td><b>{{财务回报型}}</b></td><td>{{直接问期权}}</td><td>只讲公开事实，激励细节待客户确认</td><td>绝不自己算期权价值，绝不承诺</td></tr>
+    </tbody>
+  </table>
+
+  <h3><span class="dash">/</span>面试题库（可直接交给客户 HR/用人经理）</h3>
+
+  <div class="grid3">
+    <div class="card"><div class="ttl"><span class="dot"></span>技术判断类</div>
+      <ul style="font-size:12.8px"><li>{{问题}}</li><li>{{…}}</li></ul></div>
+    <div class="card"><div class="ttl"><span class="dot"></span>落地验证类</div>
+      <ul style="font-size:12.8px"><li>{{问题}}</li><li>{{…}}</li></ul></div>
+    <div class="card"><div class="ttl"><span class="dot"></span>协作与动机类</div>
+      <ul style="font-size:12.8px"><li>{{问题}}</li><li>{{…}}</li></ul></div>
+  </div>
+</section>
+
+
+<!-- ========== 10 搜寻路径与风险 ========== -->
+<section id="p6">
+  <h2 class="sec"><span class="idx">10</span>搜寻路径与风险：{{几周}}怎么打</h2>
+
+  <p class="lead">
+    研究到这里，"能打电话"的标准已经达到。剩下的是执行节奏——<strong>不要几条线同时铺，先打一条，用反馈校正画像，再铺第二条。</strong>
+  </p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="st">第 1 周 ｜ {{先打哪两条最短路径}}</div>
+      <div class="sd">{{每条线的目标公司、目标电话数、目标可推数，以及两条线各自验证什么}}</div>
+    </div>
+    <div class="step">
+      <div class="st">第 2 周 ｜ {{上哪个高价值池}}</div>
+      <div class="sd">{{关键动作：向客户回报反馈 + 抛岔路口问题}}</div>
+    </div>
+    <div class="step">
+      <div class="st">第 {{3–4}} 周 ｜ 定向挖 + 转介绍放大</div>
+      <div class="sd">用<b>专利共同发明人</b>反查、用<b>供应商圈</b>反查、用<b>候选人转介绍</b>放大。</div>
+    </div>
+  </div>
+
+  <h3><span class="dash">/</span>三条明确建议</h3>
+
+  <table class="tight">
+    <thead><tr><th style="width:6%">#</th><th style="width:36%">建议</th><th style="width:58%">理由</th></tr></thead>
+    <tbody>
+      <tr><td><b>1</b></td><td><b>{{可执行建议，动词开头}}</b></td><td>{{依据，最好带数据}}</td></tr>
+      <tr><td><b>2</b></td><td><b>{{…}}</b></td><td>{{…}}</td></tr>
+      <tr><td><b>3</b></td><td><b>{{暂不碰什么}}</b></td><td>{{技术栈错位在哪，硬推会消耗客户信任}}</td></tr>
+    </tbody>
+  </table>
+
+  <h3><span class="dash">/</span>风险与待核验清单（诚实列出，比假装什么都知道更有用）</h3>
+
+  <table class="tight">
+    <thead><tr><th style="width:26%">条目</th><th style="width:14%">当前状态</th><th style="width:60%">怎么补</th></tr></thead>
+    <tbody>
+      <tr><td>{{待核项}}</td><td>❓L4 估算</td><td>{{具体补法：问谁、查什么、用什么反推}}</td></tr>
+      <tr><td>{{是否给期权}}</td><td>❓ 未确认</td><td><b>绝不对外承诺。</b>向客户书面确认后再谈</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout c-risk">
+    <div class="h">⚠ 三条合规与口碑红线</div>
+    ① 不打听客户或竞品的未公开经营数据，只聊公开信息与行业判断；<br>
+    ② 不诱导候选人带走原公司的技术资料、图纸、BOM 或团队名单；<br>
+    ③ 涉及竞业限制的，<b>只提醒候选人自行评估，不做规避建议</b>。
+  </div>
+
+  <h3><span class="dash">/</span>交付前自检</h3>
+  <ul class="checklist">
+    <li>这个行业靠什么赚钱？钱集中在哪个环节？→ {{答案}}</li>
+    <li>四家标杆各自的技术取舍是什么？谁的交付是真的？→ {{答案}}</li>
+    <li>目标岗位的人现在在哪 3 家公司、哪个团队？→ {{答案}}</li>
+    <li>我能用一个行业术语开场且不被识破是外行？→ {{能，列出 3-5 个术语}}</li>
+    <li>报告里每条关键数据都带了来源等级？→ {{是}}</li>
+    <li>客户读完会不会觉得"这人懂我们行业"？→ {{会，因为哪两个判断是外行写不出来的}}</li>
+  </ul>
+</section>
+
+
+<!-- ========== 11 附录 ========== -->
+<section id="appendix">
+  <h2 class="sec"><span class="idx">11</span>来源与置信度说明</h2>
+
+  <table class="tight">
+    <thead><tr><th style="width:10%">级别</th><th style="width:34%">来源类型</th><th style="width:56%">本报告中用到的地方</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag l1">✅L1</span></td><td>公司官网、官方公告、招聘官网</td><td>{{逐条列出用了哪些官方数据}}</td></tr>
+      <tr><td><span class="tag l2">🟡L2</span></td><td>券商/咨询机构报告、公开报道中的融资信息</td><td>{{…}}</td></tr>
+      <tr><td><span class="tag l3">🔵L3</span></td><td>科技媒体、行业媒体、招聘平台公开岗位</td><td>{{…}}</td></tr>
+      <tr><td><span class="tag l4">❓L4</span></td><td>推断与估算</td><td>{{…}}。<b>全部标注，不进结论。</b></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout c-info">
+    <div class="h">◉ 一句话方法论复盘</div>
+    这次能出结论，靠的不是"知道很多{{行业}}知识"，而是三件事：
+    <b>① 先拆 JD 再查行业</b>（顺序对了省一半时间）；
+    <b>② 对客户给的公司池做反向修正</b>（客户给的是"知名公司"，不是"匹配人才"）；
+    <b>③ 从招聘信号反推客户真实处境</b>（同岗几个价、在线多久，比任何行业报告都真实）。
+  </div>
+
+  <!-- 页脚：知识库链接必须随文件走，客户转发也能点开
+       注意：页脚不写"资料来源包含…"这类清单。知识库名称只出现在下面
+       标题为「延伸资源」的这一个链接区块里，不进正文、不进第 11 节来源分级表。
+       来源只用第 11 节的 L1–L4 等级表达，不披露资料从哪里来。 -->
+  <div class="footer">
+    <b>{{行业}} · {{岗位}}（{{城市}}）｜行业速研与人才地图</b><br>
+    编制：{{编制人}} &nbsp;|&nbsp; 方法论：猎头快速吃透陌生行业（阶段 0–6 全流程）&nbsp;|&nbsp; 数据截止 {{YYYY-MM-DD}}<br>
+    本报告中的薪资、团队规模、组织关系等标注 ❓L4 的信息，均为待核验推断，正式对客户输出前需二次确认。<br>
+    人才信息仅使用画像代号，未包含任何候选人的真实姓名、联系方式与个人薪资。<br>
+    延伸资源：<a href="https://ima.qq.com/wiki/?shareId=7baecdcbf548190c5d1c454fa0c6d4c8d4cbc0adcf0df6d0e02c9d8f303b6ff5">猎头HR全能知识库</a>（猎头做单全流程 + 话术 + 模板）
+  </div>
+</section>
+
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{
+  "name": "dsh-headhunter-industry-ramp",
+  "version": "1.1.0",
+  "description": "猎头陌生行业速研技能：数小时内吃透一个此前从未接触过的赛道，产出行业认知、目标公司池与人才地图（HTML/docx 报告 + 人才地图 Excel）。",
+  "type": "module",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "skills/",
+    "examples/",
+    "assets/",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "skill",
+    "headhunter",
+    "recruiting",
+    "recruitment",
+    "talent-mapping",
+    "industry-research",
+    "chinese-recruiting"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/dsh-skill-filesystem": ">=0.1.0-rc.6 <0.3.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
