@@ -28,7 +28,17 @@ dsh plugin --profile web add github:dzc55551-eng/dsh-headhunter-industry-ramp
 dsh plugin --profile web add github:dzc55551-eng/dsh-headhunter-industry-ramp#main
 ```
 
-`--profile web` 要放在 `add` 前面：它后面的参数会原样转给 pnpm，所以 `--profile` 必须是启动器的参数。装完重启 DSH（`dsh web`），插件才会加载。
+`--profile web` 要放在 `add` 前面：它后面的参数会原样转给 pnpm，所以 `--profile` 必须是启动器的参数。
+
+**装完必须放行技能权限（pnpm v12 起）。** 新装的 skill 会被 pnpm 拦在审批门后，提示 `Agent skills awaiting approval`——不放行的话文件装了也不生效。每台机器要各自批一次（审批决定只存在本机，不随包发布）：
+
+```bash
+dsh plugin --profile web approve
+```
+
+命令会列出插件申请的权限并让你确认，本插件只申请 `skills` 一项。可随时用 `dsh plugin --profile web permissions list` 查看审批状态，看到 `Granted: dsh-headhunter-industry-ramp skills` 即为放行成功。
+
+放行后重启 DSH（`dsh web`），插件才会加载。
 
 不用 DSH，或者想手动装，把 skill 目录复制过去：
 
@@ -131,6 +141,14 @@ dsh plugin --profile web add dsh-headhunter-industry-ramp
 # or from source:
 dsh plugin --profile web add github:dzc55551-eng/dsh-headhunter-industry-ramp
 ```
+
+**Then approve the skill (required since pnpm v12).** Newly installed skills are held behind an approval gate. Without approving, the files are present but the skill stays inactive. Approval is per-machine and must be done by each user:
+
+```bash
+dsh plugin --profile web approve
+```
+
+Check with `dsh plugin --profile web permissions list` — `Granted: dsh-headhunter-industry-ramp skills` means it is active. Restart `dsh web` afterwards.
 
 ## License
 
