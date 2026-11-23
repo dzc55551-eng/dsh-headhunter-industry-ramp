@@ -15,11 +15,20 @@
 
 ## 安装
 
-DSH 一条命令：
+DSH 一条命令（从 npm 安装，推荐）：
 
 ```bash
-dsh plugin add dzc55551-eng/dsh-headhunter-industry-ramp
+dsh plugin --profile web add dsh-headhunter-industry-ramp
 ```
+
+或者从 GitHub 源码安装（可固定到某个分支或 commit）：
+
+```bash
+dsh plugin --profile web add github:dzc55551-eng/dsh-headhunter-industry-ramp
+dsh plugin --profile web add github:dzc55551-eng/dsh-headhunter-industry-ramp#main
+```
+
+`--profile web` 要放在 `add` 前面：它后面的参数会原样转给 pnpm，所以 `--profile` 必须是启动器的参数。装完重启 DSH（`dsh web`），插件才会加载。
 
 不用 DSH，或者想手动装，把 skill 目录复制过去：
 
@@ -45,7 +54,7 @@ cp -r dsh-headhunter-industry-ramp/skills/headhunter-industry-ramp /你的项目
 ## 里面有什么
 
 ```
-package.json                 声明 dsh.bundle，让 `dsh plugin add` 能装
+package.json                 声明 dsh.bundle，让 `dsh plugin --profile web add` 能装
 cordis.patch.yml             插件挂载点
 index.js                     把 skills/ 注册成一个 skill 提供方
 examples/walkthrough.md      一次完整的真实跑通记录
@@ -118,7 +127,9 @@ skills/headhunter-industry-ramp/
 **Install.**
 
 ```bash
-dsh plugin add dzc55551-eng/dsh-headhunter-industry-ramp
+dsh plugin --profile web add dsh-headhunter-industry-ramp
+# or from source:
+dsh plugin --profile web add github:dzc55551-eng/dsh-headhunter-industry-ramp
 ```
 
 ## License

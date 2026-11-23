@@ -1,6 +1,6 @@
 {
   "name": "dsh-headhunter-industry-ramp",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "猎头陌生行业速研技能：数小时内吃透一个此前从未接触过的赛道，产出行业认知、目标公司池与人才地图（HTML/docx 报告 + 人才地图 Excel）。",
   "type": "module",
   "main": "index.js",
