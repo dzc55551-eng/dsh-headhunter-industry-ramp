@@ -18,13 +18,13 @@
 DSH 一条命令：
 
 ```bash
-dsh plugin add YOUR_GITHUB_ID/dsh-headhunter-industry-ramp
+dsh plugin add dzc55551-eng/dsh-headhunter-industry-ramp
 ```
 
 不用 DSH，或者想手动装，把 skill 目录复制过去：
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_ID/dsh-headhunter-industry-ramp.git
+git clone https://github.com/dzc55551-eng/dsh-headhunter-industry-ramp.git
 cp -r dsh-headhunter-industry-ramp/skills/headhunter-industry-ramp ~/.agents/skills/
 ```
 
@@ -118,7 +118,7 @@ skills/headhunter-industry-ramp/
 **Install.**
 
 ```bash
-dsh plugin add YOUR_GITHUB_ID/dsh-headhunter-industry-ramp
+dsh plugin add dzc55551-eng/dsh-headhunter-industry-ramp
 ```
 
 ## License
