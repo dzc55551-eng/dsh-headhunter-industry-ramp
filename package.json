@@ -1,6 +1,6 @@
 {
   "name": "dsh-headhunter-industry-ramp",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "猎头陌生行业速研技能：数小时内吃透一个此前从未接触过的赛道，产出行业认知、目标公司池与人才地图（HTML/docx 报告 + 人才地图 Excel）。",
   "type": "module",
   "main": "index.js",
@@ -35,7 +35,7 @@
     "chinese-recruiting"
   ],
   "peerDependencies": {
-    "@deepseek-ai/dsh-skill-filesystem": ">=0.1.0-rc.6 <0.3.0"
+    "@deepseek-ai/dsh-skill-filesystem": ">=0.1.0-rc.6 <0.3.0 || >=0.2.0-rc.1 <0.3.0 || >=0.2.1-rc.1 <0.3.0 || >=0.2.2-rc.1 <0.3.0 || >=0.2.3-alpha.1 <0.3.0"
   },
   "dsh": {
     "bundle": {
